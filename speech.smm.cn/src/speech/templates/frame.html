@@ -1,0 +1,342 @@
+{% macro script( url )%}
+    <script type="text/javascript" src='{{base.Render.Source("static")}}/{{base.Config.Version}}/{{url}}' ></script>
+{% endmacro%}
+{% macro script_lib( url )%}
+    <script type="text/javascript" src='{{base.Render.Source("library")}}/{{url}}' ></script>
+{% endmacro%}
+{% macro link( url )%}
+    <link rel="stylesheet" type="text/css" href='{{base.Render.Source("static")}}/{{base.Config.Version}}/{{url}}' />
+{% endmacro%}
+{% macro link_lib( url )%}
+    <link rel="stylesheet" type="text/css" href='{{base.Render.Source("library")}}/{{url}}' />
+{% endmacro%}
+{% macro body_title( name )%}
+    <h5 class="smm-body-title">{{name}}</h5>
+    <hr>
+{% endmacro%}
+{% macro page( p )%}
+<div class="pull-right smm-paging">
+    <!-- <div class="input-group"></div> -->
+    <div class="btn-group smm-paging-info" >
+        <div>共有{{p.Total}}条，每页显示{{p.Size}}条</div>
+    </div>
+    <ul class="pagination pagination-sm" >
+        <li class="{%if p.Now == 1 %}disabled{%endif%}"><a href="{%if p.Now != 1 %}{{p.UrlLeft}}{{p.First}}{{p.UrlRight}}{%else%}javascript:void(0){%endif%}"><i class="fa fa-angle-double-left"></i></a></li>
+        <li class="{%if p.Now == 1 %}disabled{%endif%}"><a href="{%if p.Now != 1 %}{{p.UrlLeft}}{{p.Prev}}{{p.UrlRight}}{%else%}javascript:void(0){%endif%}" ><i class="fa fa-angle-left"></i></a></li>
+        {%for index in p.Pages%}
+            <li class="{%if index == p.Now %}active{%endif%}"><a href="{{p.UrlLeft}}{{index}}{{p.UrlRight}}">{{index}}</a></li>
+        {%endfor%}
+        <li class="{%if p.Now == p.Last %}disabled{%endif%}"><a href="{%if p.Now != p.Last %}{{p.UrlLeft}}{{p.Next}}{{p.UrlRight}}{%else%}javascript:void(0){%endif%}"><i class="fa fa-angle-right"></i></a></li>
+        <li class="{%if p.Now == p.Last %}disabled{%endif%}"><a href="{%if p.Now != p.Last %}{{p.UrlLeft}}{{p.Last}}{{p.UrlRight}}{%else%}javascript:void(0){%endif%}"><i class="fa fa-angle-double-right"></i></a></li>
+    </ul>
+</div>
+{% endmacro%}
+
+<!DOCTYPE html>
+<html  lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="viewport" content="width=640px,user-scalable=no"> -->
+    <meta http-equiv="cache-control" content="max-age=31536000">
+    <meta name="renderer" content="webkit">
+    <title>{%block title%}{%endblock%}</title>
+    <link rel="shortcut icon" type="image/x-icon" href='{{base.Render.Source("static")}}/{{base.Config.Version}}/img/favicon.ico'/>
+    {{ link_lib("font-awesome/css/font-awesome.min.css" ) }}
+    {{ link_lib("bootstrap3.3.6/dist/css/bootstrap.min.css") }}
+    {%block links %}{%endblock%}
+    {{ link("css/trade.css" ) }}
+    <!--[if lt IE 9]>
+        {{ script_lib ("html5shiv/dist/html5shiv.min.js")}}
+        {{ script_lib ("respond/dest/respond.min.js")}}
+    <![endif]-->
+
+</head>
+<body class='{%if base.Frame.IsHidden("SMM_speech_index_hidden")%}smm-index-hidden{%endif%}'>
+    {%for name , value in base.Config.Links%}
+    <input type="hidden" class="smm_config" name="{{name}}" value="{{value}}">
+    {%endfor%}
+    <nav class="smm-nav ">
+        <div class="smm-nav-user"  href=''>
+            <div class="smm-nav-user-name">
+                <span>
+                    Tools
+                </span>
+                <i class="fa fa-caret-down"></i>
+            </div>
+            <ul>
+                <li>pen</li>
+            </ul>
+        </div>
+<!--         <a  class="smm-nav-notify smm_nav_notify messagebox" href='javascript:void(0)'>
+            <i class="fa fa-bell"></i>
+            <span class="badge smm-back-warning smm-hidden"></span>
+        </a> -->
+        <div class="smm-nav-icon smm_nav_icon">
+            <i class="fa fa-bars"></i>
+        </div>
+        <div class="smm-nav-title"><a href='{{base.Render.Links("host")}}/'>Tingersure's speech</a></div>
+    </nav>
+
+    <div class="smm-index">
+
+        <ul class='{%if base.Frame.IsHidden("SMM_speech_function_pointers_hidden")%}smm-index-fold{%endif%}' >
+            <a href='javascript:void(0)'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="函数指针"
+                    hidden-cookie="SMM_speech_function_pointers_hidden"
+                    class="smm-index-leader smm_index_leader">
+                    <i class="fa fa-chevron-down"></i>
+                    <div class="smm-index-menu">
+                        函数指针
+                        <i class="fa fa-cog pull-right smm-index-set-icon"></i>
+                    </div>
+
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/function_pointers_base_info'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="基本概念"
+                    class="{%block function_pointers_base_info %}{%endblock%}">
+                    <i class="fa fa-file-text"></i>
+                    <div class="smm-index-menu">基本概念</div>
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/function_pointers_inner'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="内部函数"
+                    class="{%block function_pointers_inner %}{%endblock%}">
+                    <i class="fa fa-clone"></i>
+                    <div class="smm-index-menu">内部函数</div>
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/function_pointers_anonymous'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="匿名函数"
+                    class="{%block function_pointers_anonymous %}{%endblock%}">
+                    <i class="fa fa-clone"></i>
+                    <div class="smm-index-menu">匿名函数</div>
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/function_pointers_callback'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="回调函数"
+                    class="{%block function_pointers_callback %}{%endblock%}">
+                    <i class="fa fa-list"></i>
+                    <div class="smm-index-menu">回调函数</div>
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/function_pointers_closure'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="闭包"
+                    class="{%block function_pointers_closure%}{%endblock%}">
+                    <i class="fa fa-history"></i>
+                    <div class="smm-index-menu">闭包</div>
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/function_pointers_interface'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="接口"
+                    class="{%block function_pointers_interface %}{%endblock%}">
+                    <i class="fa fa-history"></i>
+                    <div class="smm-index-menu">接口</div>
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/function_pointers_oop'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="面向对象"
+                    class="{%block function_pointers_oop %}{%endblock%}">
+                    <i class="fa fa-history"></i>
+                    <div class="smm-index-menu">面向对象</div>
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/function_pointers_asynchronous'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="异步"
+                    class="{%block function_pointers_asynchronous %}{%endblock%}">
+                    <i class="fa fa-history"></i>
+                    <div class="smm-index-menu">异步</div>
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/function_pointers_pure_asynchronous'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="纯粹的异步"
+                    class="{%block function_pointers_pure_asynchronous %}{%endblock%}">
+                    <i class="fa fa-history"></i>
+                    <div class="smm-index-menu">纯粹的异步</div>
+                </li>
+            </a>
+
+        </ul>
+
+        <ul class='{%if base.Frame.IsHidden("SMM_speech_others_hidden")%}smm-index-fold{%endif%}' >
+            <a href='javascript:void(0)'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="其他"
+                    hidden-cookie="SMM_speech_others_hidden"
+                    class="smm-index-leader smm_index_leader">
+                    <i class="fa fa-2 fa-chevron-down"></i>
+                    <div class="smm-index-menu">
+                        其他
+                        <i class="fa fa-cog pull-right smm-index-set-icon"></i>
+                    </div>
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/tool_json_to_go_struct'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="json to go struct"
+                    class="{%block page_json_to_struct%}{%endblock%}">
+                    <i class="fa fa-columns "></i>
+                    <div class="smm-index-menu">json to go struct</div>
+                </li>
+            </a>
+        </ul>
+    </div>
+
+    <div class="smm-body">
+        <div class="smm-context">
+            {%block body %}{%endblock%}
+        </div>
+    </div>
+
+    <div class="modal fade smm_alert" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title smm_alert_title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="smm_alert_icon col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">
+                            <i class=" fa fa-check-circle-o fa-3x text-success"> </i>
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 smm_alert_body smm-alert-body"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm  smm-btn-blue" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade smm_confirm" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title smm_alert_title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="smm_alert_icon col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">
+                            <i class=" fa fa-check-question-o fa-3x text-warning"> </i>
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 row smm-alert-body">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 smm_alert_body"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 smm_alert_check_line">
+                                <input type="checkbox" class="smm_alert_checked" />
+                                <span class="smm_alert_check smm-confirm-check-msg"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm  smm-btn-blue smm_confirm_ok">确定</button>
+                    <button type="button" class="btn btn-sm  smm-btn-grey" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade smm_prompt" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title smm_alert_title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="smm_alert_icon col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right">
+                            <i class=" fa fa-pencil-square-o fa-3x text-warning"> </i>
+                        </div>
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 smm-alert-body">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 smm_alert_body"></div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <input type="text" class="form-control smm_prompt_input" />
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 smm_alert_body_foot"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm smm-btn-blue smm_prompt_ok">确定</button>
+                    <button type="button" class="btn btn-sm  smm-btn-grey" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade smm_cover" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row smm-cover-body">
+                        <div class="smm_alert_icon col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">
+                            <i class=" fa fa-spinner fa-pulse fa-3x fa-fw text-success"> </i>
+                        </div>
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 smm_alert_body smm-alert-body"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block alert %}{%endblock%}
+    {{ script_lib("jquery1.11.3/dist/jquery.min.js") }}
+    {{ script_lib("bootstrap3.3.6/dist/js/bootstrap.min.js") }}
+    {{ script("js/trade_base.js") }}
+    {{ script("js/frame.js") }}
+    {% block scripts %}{%endblock%}
+</body>
+</html>

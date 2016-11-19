@@ -1,0 +1,64 @@
+{
+    "version"   : "version",
+
+    "port"      : "10001",
+
+    "static_service_path"    : {
+
+        "/static"       : "./static",
+
+        "/bower"        : "./bower_components"
+
+    },
+
+    "static_service"    : true,
+
+    "source"   : {
+
+        "static"    : [ "/static" ],
+
+        "library"   : [ "/bower"  ]
+
+    },
+
+    "links" : {
+
+        "host"          : ""
+
+    },
+
+    "cookie_domain" : ".smm.cn",
+
+    "token_key"     : "SMM_auth_token",
+
+    "https_cert"    : "STAR_smm_cn.crt",
+
+    "https_key"     : "smmprivate.key",
+
+    "qiniu_file_upload_path" : "trade/image/",
+
+    "release"       : false ,
+
+    "endless"       : false ,
+
+    "https"         : false ,
+
+    "https_service" : false ,
+
+    "statistics"    : false ,
+
+    "internal_server_error" : true,
+
+    "robots" : [
+        "User-agent: *"
+    ],
+    "hidden_cookie" : [
+        "SMM_speech_index_hidden",
+        "SMM_speech_function_pointers_hidden",
+        "SMM_speech_others_hidden"
+    ]
+
+
+
+
+}

@@ -1,0 +1,76 @@
+{% extends  "frame.html" %}
+
+{% block title %} Tingersure's speech {%endblock%}
+{%block function_pointers_inner%}smm-active{%endblock%}
+{% block scripts %}
+{%endblock%}
+
+
+{%block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                {{body_title("内部函数")}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="page-header">
+                    <h1>内部函数<small>(函数内部定义的函数)</small></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">函数包含函数</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>函数像 <code>array</code> ， <code>struct</code> ， <code>object</code> 等复合数据类型一样，可以被当作数据一样被创建、赋值、传递。</p>
+                        <p>javascript : </p>
+                        <pre>
+
+        function a (){
+            console.log("hello world!");
+        }
+
+        var b = a;
+
+        b();
+                        </pre>
+                        <p>go : </p>
+                        <pre>
+
+        func a (){
+            log.Println("hello world!")
+        }
+
+        b := a
+
+        b()
+                        </pre>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">几乎所有的语言都支持</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>许多语言都直接支持函数指针，如 <code>c</code> ， <code>go</code> ， <code>javascript</code> 。</p>
+                        <p>哪些没有直接支持函数指针的语言，也会通过类似于接口，面向对象等方式间接提供（封装）函数指针功能，如 <code>java</code> 。</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{%endblock%}
+
+

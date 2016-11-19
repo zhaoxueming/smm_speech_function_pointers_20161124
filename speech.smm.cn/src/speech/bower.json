@@ -1,0 +1,37 @@
+{
+  "name": "ex.smm.cn",
+  "homepage": "https://github.com/smmit/web",
+  "authors": [
+    "zhaoxueming <zhaoxueming@smm.cn>"
+  ],
+  "description": "ex for smm",
+  "main": "none",
+  "keywords": [
+    "ex",
+    "smm"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "private": true,
+  "dependencies": {
+    "bootstrap3.3.6": "bootstrap#3.3.6",
+    "jquery1.11.3": "jquery#1.11.3",
+    "jQuery.print1.4.0": "jQuery.print#1.4.0",
+    "angular1.2.0": "angular#1.2.0",
+    "font-awesome": "fontawesome#^4.6.2",
+    "crypto-js": "^3.1.6",
+    "respond": "^1.4.2",
+    "html5shiv": "^3.7.3",
+    "smalot-bootstrap-datetimepicker2.2.0": "bootstrap-datetimepicker-master#2.2.0",
+    "venobox": "^1.6.0",
+    "bootstrap-validator": "^0.11.5",
+    "bootstrap-select": "^1.10.0",
+    "blueimp-file-upload": "jquery-file-upload#^9.12.5"
+  }
+}

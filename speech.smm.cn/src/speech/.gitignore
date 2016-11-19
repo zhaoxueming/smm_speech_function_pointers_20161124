@@ -1,0 +1,6 @@
+config.user.json
+bower_components/
+.DS_Store
+*.zip
+*.log
+*.out

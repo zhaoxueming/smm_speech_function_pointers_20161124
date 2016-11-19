@@ -1,0 +1,38 @@
+{% extends  "frame.html" %}
+
+{% block title %} SMM-交易中心-访问错误 {%endblock%}
+
+{%block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                {{body_title("访问错误")}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 h3 text-center">
+                {{msg}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                <a class="btn smm-btn-grey"
+                    {%if url%}
+                        href="{{url}}"
+                    {%else%}
+                        href="javascript:history.go(-1)"
+                    {%endif%}  >
+                    {%if btn%}
+                        {{btn}}
+                    {%else%}
+                        返回
+                    {%endif%}
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+{%endblock%}
+
+

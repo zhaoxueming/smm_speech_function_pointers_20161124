@@ -1,0 +1,28 @@
+{% extends  "frame.html" %}
+
+{% block title %} Tingersure's speech {%endblock%}
+{%block page_json_to_struct%}smm-active{%endblock%}
+{% block scripts %}
+    {{ script("js/tool_json_to_go_struct.js") }}
+{%endblock%}
+
+
+{%block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                {{body_title("json_to_go_struct")}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
+                <textarea rows="40" class="source form-control"></textarea>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
+                <textarea rows="40" class="target form-control"></textarea>
+            </div>
+        </div>
+    </div>
+{%endblock%}
+
+
