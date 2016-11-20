@@ -23,13 +23,6 @@ import(
 )
 
 const (
-    TRADE_CENTER        = "trade_center"
-    PAY_CENTER          = "pay_center"
-    MSG_CENTER          = "msg_center"
-    USER_CENTER         = "user_center"
-    BCHAINTRADE         = "bchaintrade"
-
-    MSG_TRADE_CODE      = 2
 
     JSON_SUCCESS_CODE   = "0"
     JSON_SUCCESS_MSG    = "ok"
@@ -38,10 +31,6 @@ const (
     JSON_CODE           = "code"
     JSON_DATA           = "data"
 
-    PAY_AUTH_PASS       = "100"
-    BILL_CREATE_ORDER_TYPE_SELL = "1"
-    BILL_CREATE_ORDER_TYPE_BUY  = "0"
-    BCHAIN_AUTH_KEY     = "auth_token"
 )
 
 var(
