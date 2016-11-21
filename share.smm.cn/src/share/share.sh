@@ -1,43 +1,43 @@
 #!/bin/bash
 
-function speech_pid(){
-    echo `ps -ef | grep -i speech.out | grep -v "grep" | awk '{print $2}'`
+function share_pid(){
+    echo `ps -ef | grep -i share.out | grep -v "grep" | awk '{print $2}'`
 }
 
-function speech_gopath(){
+function share_gopath(){
     cd ../..
-    local_go_path=`pwd | grep -i speech | awk '{print $0}'`
+    local_go_path=`pwd | grep -i share | awk '{print $0}'`
     export GOPATH=$GOPATH:${local_go_path}
-    cd ./src/speech
+    cd ./src/share
 }
 
-function speech_close(){
-    speechpid=`speech_pid`
-    if [ x$speechpid != x""  ];then
-        kill -9 ${speechpid}
-        echo kill speech : ${speechpid}
+function share_close(){
+    sharepid=`share_pid`
+    if [ x$sharepid != x""  ];then
+        kill -9 ${sharepid}
+        echo kill share : ${sharepid}
     fi
 }
 
-function speech_build(){
-    rm -f speech.out
-    go build -o speech.out main.go
+function share_build(){
+    rm -f share.out
+    go build -o share.out main.go
 
     if [ $? != "0" ];then
         exit $?
     fi
-    chmod 755 speech.out
+    chmod 755 share.out
 }
 
-function speech_start(){
-    nohup ./speech.out > speech.log 2>&1  &
+function share_start(){
+    nohup ./share.out > share.log 2>&1  &
 }
 
-function speech_log(){
-    tail -f speech.log
+function share_log(){
+    tail -f share.log
 }
 
-function speech_init(){
+function share_init(){
     bower update -q
     if [ $? != "0" ];then
         echo "init failed : bower failed"
@@ -49,15 +49,15 @@ function speech_init(){
     fi
 }
 
-function speech_clean(){
-    rm -f  speech_*.zip
+function share_clean(){
+    rm -f  share_*.zip
 #    rm -rf bower_components
-    rm -f  speech.log
-    rm -f  speech.out
+    rm -f  share.log
+    rm -f  share.out
 #    rm -f  config.user.json
 }
 
-function speech_package(){
+function share_package(){
     if [ $# != 1 ];then
         echo "package failed : version is empty"
         echo "use $0 package as"
@@ -66,51 +66,51 @@ function speech_package(){
         echo "======================="
         exit 1
     fi
-    if [ -e speech_$1.zip ];then
-        echo package warning : speech_$1.zip is exist
+    if [ -e share_$1.zip ];then
+        echo package warning : share_$1.zip is exist
         echo press y to remove it and continue, or other word to exit
-        read removespeechzip
-        if [ x$removespeechzip != x"y" ];then
+        read removesharezip
+        if [ x$removesharezip != x"y" ];then
             exit 2
         fi
-        rm -rf speech_$1.zip
+        rm -rf share_$1.zip
     fi
 
-    if [ -e speech_smm_cn ];then
-        echo package warning : dir/file speech_smm_cn is exist
+    if [ -e share_smm_cn ];then
+        echo package warning : dir/file share_smm_cn is exist
         echo press y to remove it and continue, or other word to exit
-        read removespeechsmmcn
-        if [ x$removespeechsmmcn != x"y"  ];then
+        read removesharesmmcn
+        if [ x$removesharesmmcn != x"y"  ];then
             exit 3
         fi
-        rm -rf speech_smm_cn
+        rm -rf share_smm_cn
     fi
 
-    echo speech $1 build start
+    echo share $1 build start
 
     export GIN_MODE=release
-    mkdir speech_smm_cn
-    cd speech_smm_cn
+    mkdir share_smm_cn
+    cd share_smm_cn
     mkdir service
     mkdir static
     mkdir library
     cd ../
 
     echo init success
-    speech_gopath
+    share_gopath
     echo gopath set success
-    go build -o speech_smm_cn/service/speech_$1 main.go
+    go build -o share_smm_cn/service/share_$1 main.go
 
     echo go build success
 
-    #cp STAR_smm_cn.crt  speech_smm_cn/service/
-    #cp smmprivate.key  speech_smm_cn/service/
-    cp config.default.json  speech_smm_cn/service/
-    cp -rf templates speech_smm_cn/service/templates_$1
+    #cp STAR_smm_cn.crt  share_smm_cn/service/
+    #cp smmprivate.key  share_smm_cn/service/
+    cp config.default.json  share_smm_cn/service/
+    cp -rf templates share_smm_cn/service/templates_$1
 
     echo service copy success
 
-    cp -rf static/version speech_smm_cn/static/$1
+    cp -rf static/version share_smm_cn/static/$1
 
     echo static copy success
 
@@ -118,23 +118,23 @@ function speech_package(){
 
     echo bower success
 
-    cp bower.json speech_smm_cn/library/
-    cp -rf bower_components speech_smm_cn/library/
+    cp bower.json share_smm_cn/library/
+    cp -rf bower_components share_smm_cn/library/
 
     echo library copy success
 
-    zip -rq speech_$1.zip ./speech_smm_cn
+    zip -rq share_$1.zip ./share_smm_cn
 
     echo package success
 
-    rm -rf speech_smm_cn
+    rm -rf share_smm_cn
 
     echo clean success
 
-    echo speech $1 build finished
+    echo share $1 build finished
 }
 
-function speech_help(){
+function share_help(){
     echo "usage: $0 [<command>] [<args>]"
     echo ""
     echo "These are common $0 commands used in various situations:"
@@ -149,34 +149,34 @@ function speech_help(){
     echo "See '$0 help' to read about this infomation."
 }
 
-function speech_run(){
-    speech_gopath
-    speech_close
-    speech_build
-    speech_start
-    speech_log
+function share_run(){
+    share_gopath
+    share_close
+    share_build
+    share_start
+    share_log
 }
 
 case $1 in
 
-    "log")          speech_log
+    "log")          share_log
     ;;
-    "close")        speech_close
+    "close")        share_close
     ;;
-    "run")          speech_run
+    "run")          share_run
     ;;
-    "clean")        speech_clean
+    "clean")        share_clean
     ;;
-    "package")      speech_package $2
+    "package")      share_package $2
     ;;
-    "help")         speech_help
+    "help")         share_help
     ;;
-    "init")         speech_init
+    "init")         share_init
     ;;
     *)
         if [ x$1 != x ];then
             echo unknown command : $1
         fi
-        speech_help
+        share_help
     ;;
 esac

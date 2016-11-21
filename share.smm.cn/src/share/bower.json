@@ -1,13 +1,13 @@
 {
-  "name": "ex.smm.cn",
+  "name": "share.smm.cn",
   "homepage": "https://github.com/smmit/web",
   "authors": [
     "zhaoxueming <zhaoxueming@smm.cn>"
   ],
-  "description": "ex for smm",
+  "description": "share for smm",
   "main": "none",
   "keywords": [
-    "ex",
+    "share",
     "smm"
   ],
   "license": "MIT",
