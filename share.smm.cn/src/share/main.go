@@ -1,7 +1,7 @@
 package main
 
 import(
-    "speech/common"
+    "share/common"
 )
 
 const (
@@ -13,7 +13,7 @@ const (
 
 func main() {
     config_file := []string{ default_path, user_path }
-    trade.Service(config_file);
+    share.Service(config_file);
 
 }
 

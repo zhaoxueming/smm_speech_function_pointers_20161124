@@ -1,4 +1,4 @@
-package trade
+package share
 
 import(
     "github.com/gin-gonic/gin"

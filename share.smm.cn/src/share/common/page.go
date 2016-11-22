@@ -1,4 +1,4 @@
-package trade
+package share
 
 const(
     DefaultPageSize = 20
