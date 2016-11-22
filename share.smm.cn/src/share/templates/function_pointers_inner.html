@@ -1,6 +1,6 @@
 {% extends  "frame.html" %}
 
-{% block title %} Tingersure's speech {%endblock%}
+{% block title %} Tingersure's share {%endblock%}
 {%block function_pointers_inner%}smm-active{%endblock%}
 {% block scripts %}
 {%endblock%}
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="page-header">
-                    <h1>内部函数<small>(函数内部定义的函数)</small></h1>
+                    <h1>内部函数</h1>
                 </div>
             </div>
         </div>
@@ -20,28 +20,25 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">函数内部定义的函数</h3>
+                        <h3 class="panel-title">简单的论断</h3>
                     </div>
                     <div class="panel-body">
-                        <p>既然函数是语言层面的一种基本数据类型，就没有理由只能在语法的顶层来定义，而应该可以在任何需要的地方都可以进行定义。</p>
-                        <pre>
-
-        function a (){
-
-            function b (){
-
-                console.log( function c (){
-
-                    return "hello function!";
-
-                }());
-
-            }
-
-            b();
-        }
-
-                        </pre>
+                        <p>既然函数是语言层面的一种基本的复合数据类型，就没有理由只能在语法的顶层来定义，而应该可以在任何需要的地方都可以进行定义和使用。</p>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">定义</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>在非语法顶层定义的函数，称为内部函数。</p>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">示例</h3>
+                    </div>
+                    <div class="panel-body">
                         <pre>
 
         func a (){
@@ -58,7 +55,25 @@
             b()
         }
 
+        func main(){
+
+            a()
+
+        }
                         </pre>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">过度使用</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>内部函数虽好，可不要贪杯啊。</p>
+                        <p>不加节制的使用内部函数容易导致：</p>
+                        <p>1、代码很宽 </p>
+                        <p>嵌套太多，层次太深，代码左侧留有大面积的空白，可以用来打滚。 <a target="_blank" href="https://github.com/smmit/web/blob/master/hq.smm.cn/src/hq/static/js/history.js">案例</a></p>
+                        <p>2、内存泄漏 </p>
+                        <p>详见 <a href="/page/function_pointers_closure">闭包</a></p>
                     </div>
                 </div>
             </div>
@@ -67,10 +82,12 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">并非所有的语言都支持</h3>
+                        <h3 class="panel-title">语言支持</h3>
                     </div>
                     <div class="panel-body">
-                        <p>许多语言都直接支持内部函数，如 <code>go</code> ， <code>javascript</code> , 但仍有一些语言选择不支持，如 <code>c</code> ，也有一些语言选择了部分支持，如 <code>java</code> ,详情见 <a href='{{base.Render.Links("host")}}/page/function_pointers_closure#language_select'>闭包 &gt; 语言的抉择 </a>  。</p>
+                        <p>并非所有语言都支持内部函数。</p>
+                        <p>一些早期的语言，因为设计之初没有考虑内部函数的支持，后来再想加入这个特性的时候就常会因为内存结构变化过大而放弃，如 <code>c</code> ，详见 <a href="/page/function_pointers_closure">闭包</a></p>
+
 
                     </div>
                 </div>

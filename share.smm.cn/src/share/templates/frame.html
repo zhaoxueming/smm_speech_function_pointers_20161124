@@ -53,7 +53,7 @@
     <![endif]-->
 
 </head>
-<body class='{%if base.Frame.IsHidden("SMM_speech_index_hidden")%}smm-index-hidden{%endif%}'>
+<body class='{%if base.Frame.IsHidden("SMM_share_index_hidden")%}smm-index-hidden{%endif%}'>
     {%for name , value in base.Config.Links%}
     <input type="hidden" class="smm_config" name="{{name}}" value="{{value}}">
     {%endfor%}
@@ -76,19 +76,19 @@
         <div class="smm-nav-icon smm_nav_icon">
             <i class="fa fa-bars"></i>
         </div>
-        <div class="smm-nav-title"><a href='{{base.Render.Links("host")}}/'>Tingersure's speech</a></div>
+        <div class="smm-nav-title"><a href='{{base.Render.Links("host")}}/'>Tingersure's share</a></div>
     </nav>
 
     <div class="smm-index">
 
-        <ul class='{%if base.Frame.IsHidden("SMM_speech_function_pointers_hidden")%}smm-index-fold{%endif%}' >
+        <ul class='{%if base.Frame.IsHidden("SMM_share_function_pointers_hidden")%}smm-index-fold{%endif%}' >
             <a href='javascript:void(0)'>
                 <li data-container="body"
                     data-toggle="popover"
                     data-placement="right"
                     data-trigger="hover"
                     data-content="函数指针"
-                    hidden-cookie="SMM_speech_function_pointers_hidden"
+                    hidden-cookie="SMM_share_function_pointers_hidden"
                     class="smm-index-leader smm_index_leader">
                     <i class="fa fa-chevron-down"></i>
                     <div class="smm-index-menu">
@@ -200,14 +200,14 @@
 
         </ul>
 
-        <ul class='{%if base.Frame.IsHidden("SMM_speech_others_hidden")%}smm-index-fold{%endif%}' >
+        <ul class='{%if base.Frame.IsHidden("SMM_share_others_hidden")%}smm-index-fold{%endif%}' >
             <a href='javascript:void(0)'>
                 <li data-container="body"
                     data-toggle="popover"
                     data-placement="right"
                     data-trigger="hover"
                     data-content="其他"
-                    hidden-cookie="SMM_speech_others_hidden"
+                    hidden-cookie="SMM_share_others_hidden"
                     class="smm-index-leader smm_index_leader">
                     <i class="fa fa-2 fa-chevron-down"></i>
                     <div class="smm-index-menu">

@@ -1,6 +1,6 @@
 {% extends  "frame.html" %}
 
-{% block title %} Tingersure's speech {%endblock%}
+{% block title %} Tingersure's share {%endblock%}
 {%block function_pointers_callback%}smm-active{%endblock%}
 {% block scripts %}
 {%endblock%}
@@ -8,15 +8,11 @@
 
 {%block body %}
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                {{body_title("函数指针的基本概念")}}
-            </div>
-        </div>
+
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="page-header">
-                    <h1>函数指针<small>(指向函数的指针／存储函数地址的变量)</small></h1>
+                    <h1>回调函数<small>(传递给他人，供他人在合适的时机调用的函数)</small></h1>
                 </div>
             </div>
         </div>
@@ -24,49 +20,51 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">函数是基本数据类型</h3>
+                        <h3 class="panel-title">简单示例</h3>
                     </div>
                     <div class="panel-body">
-                        <p>函数像 <code>array</code> ， <code>struct</code> ， <code>object</code> 等复合数据类型一样，可以被当作数据一样被创建、赋值、传递。</p>
-                        <p>javascript : </p>
+
                         <pre>
 
-        function a (){
-            console.log("hello world!");
+        func a (text string){
+
+            log.Println(text)
+
         }
 
-        var b = a;
+        func b (callback func(string)){
 
-        b();
-                        </pre>
-                        <p>go : </p>
-                        <pre>
+            callback("hello function!")
 
-        func a (){
-            log.Println("hello world!")
         }
 
-        b := a
-
-        b()
+        b(a)
                         </pre>
                     </div>
                 </div>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">几乎所有的语言都支持</h3>
+                        <h3 class="panel-title">匿名函数作为回调函数</h3>
                     </div>
                     <div class="panel-body">
-                        <p>许多语言都直接支持函数指针，如 <code>c</code> ， <code>go</code> ， <code>javascript</code> 。</p>
-                        <p>哪些没有直接支持函数指针的语言，也会通过类似于接口，面向对象等方式间接提供（封装）函数指针功能，如 <code>java</code> 。</p>
 
+                        <pre>
+
+        func b (callback func(string)){
+
+            callback("hello function!")
+
+        }
+
+        b(func (text string){
+
+            log.Println(text)
+
+        })
+                        </pre>
                     </div>
                 </div>
+
             </div>
         </div>
 
