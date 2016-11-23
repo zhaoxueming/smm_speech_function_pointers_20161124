@@ -110,22 +110,84 @@
                 </div>
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">回调函数 的 回调函数 的 回调函数 的 回调函数</h3>
+                        <h3 class="panel-title">回调函数 的 回调函数 的 回调函数 的 回调函数 的......</h3>
                     </div>
                     <div class="panel-body">
-
                         <pre>
 
-        ......请不要贪杯
+        func a (callback func( func( func( func( func( func ( func( string)))))))){
+
+            callback( func(callback func (func (func( func ( func ( string)))))){
+
+                callback( func(callback func(func( func (string)))){
+
+                    callback( func (callback func(string)){
+
+                            callback("hello function!")
+                    })
+                })
+            })
+        }
+
+        func main(){
+
+            a ( func (callback func ( func ( func ( func ( func ( func ( string ))))))){
+
+                callback ( func ( callback func ( func ( func ( func ( string ))))){
+
+                    callback( func ( callback func ( func ( string ))){
+
+                        callback( func (text string ){
+
+                            fmt.Println(text)
+                        })
+                    })
+                })
+            })
+        }
                         </pre>
+                        <pre>
+
+        var a = function(callback){
+
+            callback( function(callback){
+
+                callback( function(callback){
+
+                    callback( function(callback){
+
+                        callback( function(callback){
+
+                            callback("hello function!");
+
+                        });
+                    });
+                });
+            });
+        };
+
+        a(function(callback){
+
+            callback(function(callback){
+
+                callback(function(callback){
+
+                    callback(function(callback){
+
+                        callback(function(text){
+
+                            console.log(text);
+
+                        });
+                    });
+                });
+            });
+        });
+
+                        </pre>
+
                     </div>
                 </div>
-
-
-
-
-
-
             </div>
         </div>
 
