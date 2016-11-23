@@ -1,0 +1,55 @@
+{% extends  "frame.html" %}
+
+{% block title %} Tingersure's share {%endblock%}
+{%block page_run%}smm-active{%endblock%}
+{% block scripts %}
+    {{ script_lib("crypto-js/core.js") }}
+    {{ script_lib("crypto-js/enc-base64.js") }}
+    {{ script("js/tool_run.js") }}
+{%endblock%}
+
+
+{%block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                {{body_title("run")}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                <button class="btn btn-sm btn-success gorun pull-right btn-run">
+                    <img src='{{base.Render.Source("static")}}/{{base.Config.Version}}/img/go.ico' />
+                    go
+                </button>
+                <button class="btn btn-sm btn-warning noderun pull-right btn-run">
+                    <img src='{{base.Render.Source("static")}}/{{base.Config.Version}}/img/node.ico' />
+                    node
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 ">
+                <textarea rows="30" class="source form-control smm-code">
+package main
+
+import (
+    "fmt"
+)
+/****************************************/
+
+
+func main (){
+    fmt.Println("hello function!")
+}
+                </textarea>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+                <textarea rows="30" readonly="readonly" class="target form-control smm-code"></textarea>
+            </div>
+        </div>
+    </div>
+{%endblock%}
+
+

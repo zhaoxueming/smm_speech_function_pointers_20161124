@@ -15,6 +15,7 @@ import(
     "errors"
     "net/http"
     "io/ioutil"
+    "os/exec"
     "bufio"
     "fmt"
     // "time"
@@ -45,6 +46,51 @@ func index (c *gin.Context) {
 }
 
 /*
+    "/tool/gorun/:value"
+*/
+func go_run(c *gin.Context){
+    tool_run(c,"./tmp/main.go","go")
+}
+/*
+    "/tool/noderun/:value"
+*/
+func node_run(c *gin.Context){
+    tool_run(c,"./tmp/main.js","node")
+}
+
+func tool_run(c *gin.Context,file string, name string,) {
+    req := map[string]string{}
+    res := ""
+
+    err := render_error_control(func()error{
+        return render_param_base64([]string{
+            "value",
+        },c,req)
+    },func ()error {
+        return ioutil.WriteFile(file,[]byte( req["value"] ),0666)
+    },func ()error {
+        out ,err := exec.Command("./tool_run.sh",name).Output()
+        if err != nil {
+            return err
+        }
+        res = string(out)
+        return nil
+    })
+    if err != nil {
+        api_error(c,err)
+        return
+    }
+
+    c.Header("Content-Type", "text/plain")
+    c.Header("Access-Control-Allow-Origin","*")
+    c.JSON(http.StatusOK, map[string]interface{}{
+        JSON_CODE  : JSON_SUCCESS_CODE,
+        JSON_MSG   : JSON_SUCCESS_MSG,
+        JSON_DATA  : res,
+    })
+}
+
+/*
     /page/:name
 */
 func pages(c *gin.Context) {
@@ -68,6 +114,13 @@ func internal_server_error(c *gin.Context) {
 
 func page_not_found(c *gin.Context) {
     c.HTML(http.StatusNotFound, "404.html",pongo2.Context{})
+}
+
+func api_error(c *gin.Context, err error) {
+    c.JSON(http.StatusOK, map[string]interface{}{
+            JSON_CODE  : JSON_ERROR_CODE,
+            JSON_MSG   : err.Error(),
+    })
 }
 
 func robots(c *gin.Context){

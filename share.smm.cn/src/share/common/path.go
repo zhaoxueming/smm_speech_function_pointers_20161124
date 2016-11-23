@@ -20,6 +20,8 @@ func init(){
         "/"                                 : index,
         "/robots.txt"                       : robots,
         "/page/:name"                       : pages,
+        "/tool/gorun/:value"                : go_run,
+        "/tool/noderun/:value"              : node_run,
     }
 
     posts = map[string](func(*gin.Context)){

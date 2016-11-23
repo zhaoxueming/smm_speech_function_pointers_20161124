@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="page-header">
-                    <h1>回调函数<small>(传递给他人，供他人在合适的时机调用的函数)</small></h1>
+                    <h1>回调函数</h1>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
 
         func a (text string){
 
-            log.Println(text)
+            fmt.Println(text)
 
         }
 
@@ -72,7 +72,7 @@
 
             b(func (text string){
 
-                log.Println(text)
+                fmt.Println(text)
 
             })
         }
@@ -88,13 +88,22 @@
 
                         <pre>
 
+        func b ( callback func( func () string ) ){
+
+            callback(func()string{
+
+                return "hello function!"
+
+            })
+        }
+
         func main(){
 
-            b(func (func () ){
+            b(func( text func () string ){
 
-                log.Println(text)
+                fmt.Println( text() )
 
-            },true)
+            })
         }
                         </pre>
                     </div>

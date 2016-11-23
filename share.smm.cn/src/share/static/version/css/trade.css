@@ -696,10 +696,14 @@ table th , table td{
 
 }
 
+.smm-code{
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
 
 
-
-
+.btn-run{
+    margin-left: 15px;
+}
 
 
 
