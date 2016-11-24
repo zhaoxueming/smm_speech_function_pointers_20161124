@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="page-header">
-                    <h1>闭包<small>(函数的数据空间)</small></h1>
+                    <h1>函数闭包<small>(函数的数据空间)</small></h1>
                 </div>
             </div>
         </div>
@@ -22,7 +22,49 @@
                         <h3 class="panel-title">出现的原因</h3>
                     </div>
                     <div class="panel-body">
+                        <pre>
+        func f( first string )(func( string )string){
 
+            // 普通的代码块内可以访问和使用外部的变量
+
+            if( first != "" ){
+
+                first += " "
+            }
+
+            // 如果内部函数的代码块不能访问其环境的局部变量，
+            // 在内部创建函数的意义就不大了，在语法顶层创建就好了。
+
+            return func( second string )string{
+
+                // 此函数是被返回到环境函数外部执行的，那么这个函数执行时，
+                // 环境函数的局部变量理应已经被释放了，但我们确实需要它。
+
+                return first + second
+            }
+        }
+
+        func main(){
+
+            fmt.Println( f ( "hello" ) ( "function" ) )
+        }
+                        </pre>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row" id="language_select">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">解决方案</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>闭包的实现方案，各个语言各不相同。但有一个方案比较常见的。</p>
+                        <p>即函数的局部变量不再分配在栈中，而是像对象那样，为函数的每一次调用在堆中分配空间供其存放局部变量，并将空间释放的任务交给gc。</p>
+                        <p>当内部函数离开后，内部函数持有其环境函数的变量空间的指针。只要内部函数还健在，环境函数的变量空间就不会消失。</p>
+                        <p>当从属于某个函数的所有内部函数全部释放时，这个函数的变量空间将失去所有引用，进而被gc回收。</p>
                     </div>
                 </div>
 
@@ -35,7 +77,7 @@
                         <h3 class="panel-title">闭包带来了什么</h3>
                     </div>
                     <div class="panel-body">
-
+                        <p>简单的语法，像写流程控制代码块一样的方式写内部函数，而不用考虑局部变量能不能用，还在不在。</p>
                     </div>
                 </div>
 
@@ -48,38 +90,16 @@
                         <h3 class="panel-title">闭包破坏了什么</h3>
                     </div>
                     <div class="panel-body">
-
+                        <p>一般而言，函数调用使用函数调用栈来实现，栈随着函数（代码块）的调用和释放抬高和降低栈顶游标，自然的实现了局部变量空间的分配和回收。</p>
+                        <p>闭包的出现破坏了这种实现。</p>
+                        <p>由于函数可以通过指针传递离开当前环境，而离开之后的函数依然需要访问其环境中的局部变量，但此时其父函数已经执行完毕，局部变量已经释放了。</p>
+                        <p>传统的函数栈模型很难满足闭包的需求，因而许多语言选择放弃了函数栈模型。</p>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">局部变量</h3>
-                    </div>
-                    <div class="panel-body">
 
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="row" id="language_select">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">语言的抉择</h3>
-                    </div>
-                    <div class="panel-body">
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="panel panel-success">
@@ -87,7 +107,27 @@
                         <h3 class="panel-title">内存泄露</h3>
                     </div>
                     <div class="panel-body">
+                        <pre>
+        func f()(func( string )string){
 
+            //分配大块内存
+
+            first := [1000]int
+
+            first[0] = 0;
+
+            return func( second string )string{
+
+                return second
+            }
+        }
+
+        func main(){
+
+            // 将f返回出来的函数注册为某事件的监听函数，长期有效。
+            // 虽然环境函数的 first 不再使用了，但由于闭包的关系，不会被释放，形成泄漏。
+            xxxxx.listener = f()
+        }
                     </div>
                 </div>
 
@@ -97,10 +137,32 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">回调函数适配器</h3>
+                        <h3 class="panel-title">为回调函数构造适配器</h3>
                     </div>
                     <div class="panel-body">
+                        <pre>
+        func a( callback func ()){
+            callback()
+        }
 
+        func b( c string ){
+            fmt.Println(c)
+        }
+
+        func main(){
+
+            c := "hello function!"
+
+            // 此时希望 b 成为 a 的回调函数，让 a  在合适的时候调用 b 但由于双方参数列表不一致，语法不能不通过
+            //    a ( b )    不能成立
+
+            //此时可以通过闭包构造一个适配器，完成这次调用。
+
+            a (func(){
+                b(c)
+            })
+        }
+                        </pre>
                     </div>
                 </div>
 
@@ -113,7 +175,43 @@
                         <h3 class="panel-title">数据现场保护</h3>
                     </div>
                     <div class="panel-body">
+                        <pre>
 
+        var b= function( callback ){
+            setTimeout(callback,1000);
+        };
+
+        var a = function(){
+
+            for ( var i = 0 ; i < 10 ; i++ ) {
+                b(function(){
+                    console.log(i);
+                });
+            }
+        };
+
+        a();
+                        </pre>
+                        <pre>
+
+        var b= function( callback ){
+            setTimeout(callback,1000);
+        };
+
+        var a = function(){
+
+            for ( var i = 0 ; i < 10 ; i++ ) {
+                (function(){
+                    var _i = i;
+                    b(function(){
+                        console.log(_i);
+                    });
+                })();
+            }
+        };
+
+        a();
+                        </pre>
                     </div>
                 </div>
 
@@ -129,7 +227,6 @@
 
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

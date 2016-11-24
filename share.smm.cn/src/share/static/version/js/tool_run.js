@@ -9,9 +9,13 @@
         trade.Api.get({
                 path   : '/tool/'+type+'/' + trade.Format.base64(req),
                 success : function(data){
-                    console.log(data);
                     if(data.code != 0 && data.code != "0" ){
-                        res_call(data.msg);
+                        trade.Pop.alert({
+                            title : "执行错误",
+                            msg  : data.msg,
+                            icon : trade.Pop.error
+                        });
+                        res_call("");
                         return;
                     }
                     res_call(data.data);

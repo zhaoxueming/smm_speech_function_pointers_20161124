@@ -23,6 +23,7 @@
         dom.group._resize();
         p = dom.canvas.get(0).getContext('2d');
         p.strokeStyle = "red";
+        p.lineWidth = 2;
     };
     dom.canvas._mousedown = function (event) {
         status.draw = true;
@@ -34,7 +35,6 @@
     }
     dom.canvas._mouseover = function (event) {
         if(status.draw){
-            // console.log(event);
             var x = event.clientX
             var y = event.clientY
             p.beginPath();
@@ -42,8 +42,8 @@
             p.lineTo(x,y);
             p.stroke();
             p.closePath();
-            status.last_x = event.clientX;
-            status.last_y = event.clientY;
+            status.last_x = x;
+            status.last_y = y;
         }
     }
 
@@ -52,8 +52,8 @@
     }
 
     dom.close._click = function() {
-        dom.group.hide();
         dom.canvas._clear();
+        dom.group.hide();
     };
 
     dom.pen._click = function() {
