@@ -695,15 +695,48 @@ table th , table td{
     overflow: scroll;
 
 }
-
 .smm-code{
     font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
-
-
 .btn-run{
     margin-left: 15px;
 }
+
+.smm-frame-canvas-group{
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    z-index: 300;
+}
+
+.smm-frame-canvas{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    z-index: 301;
+
+}
+
+.smm-frame-close{
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    z-index: 302;
+
+}
+
+.smm-frame-clear{
+    position: absolute;
+    right: 100px;
+    top: 70px;
+    z-index: 302;
+
+}
+
 
 
 

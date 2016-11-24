@@ -66,7 +66,7 @@
                 <i class="fa fa-caret-down"></i>
             </div>
             <ul>
-                <li>pen</li>
+                <li class="smm_frame_pen">Pineapple Pen</li>
             </ul>
         </div>
 <!--         <a  class="smm-nav-notify smm_nav_notify messagebox" href='javascript:void(0)'>
@@ -343,11 +343,17 @@
             </div>
         </div>
     </div>
+    <div class="smm-frame-canvas-group smm_frame_canvas_group smm-hidden">
+        <canvas class="smm_frame_canvas smm-frame-canvas"></canvas>
+        <button class="btn btn-sm btn-success smm_frame_close smm-frame-close "><i class="fa fa-close"></i> 关闭</button>
+        <button class="btn btn-sm btn-danger smm_frame_clear smm-frame-clear "><i class="fa fa-trash"></i> 清空</button>
+    </div>
     {% block alert %}{%endblock%}
     {{ script_lib("jquery1.11.3/dist/jquery.min.js") }}
     {{ script_lib("bootstrap3.3.6/dist/js/bootstrap.min.js") }}
     {{ script("js/trade_base.js") }}
     {{ script("js/frame.js") }}
+    {{ script("js/tool_pen.js") }}
     {% block scripts %}{%endblock%}
 </body>
 </html>
