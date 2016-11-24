@@ -224,7 +224,28 @@
                         <h3 class="panel-title">函数定制</h3>
                     </div>
                     <div class="panel-body">
+                        <pre>
+        var a = function(){
 
+            var funcs = [];
+            for ( var i = 0 ; i < 10 ; i++ ) {
+                funcs.push( function(index){
+                    if( index < 4 ){
+                        index = -index;
+                    }
+                    return function(){
+                        return index;
+                    }
+                }(i));
+            }
+
+            for ( var j = 0 ; j < funcs.length; j++ ) {
+                console.log(funcs[j]());
+            }
+        };
+
+        a();
+                        </pre>
                     </div>
                 </div>
             </div>
