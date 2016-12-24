@@ -1,0 +1,141 @@
+{% extends  "frame.html" %}
+
+{% block title %} 编码规范 {%endblock%}
+{%block code_format%}smm-active{%endblock%}
+{% block scripts %}
+{%endblock%}
+
+
+{%block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="page-header">
+                    <h1>编码规范</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">函数最大行数不超过40行</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>40行为一般情况下一屏可见的最大行数。</p>
+                        <p class="text-danger">结构性函数除外。</p> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">匿名函数最大行数不超过10行</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>匿名函数通常被局部、临时地使用，只应该提供简单功能。</p> 
+                        <p>功能复杂的函数请抽离出来，正规命名。</p> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">单行代码最大宽度不超过100字符</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>超过100字符，通常意味着需要横向滚动条才能看清全貌，非常不便。</p>
+                        <p class="text-danger"><code>tab</code> 算4个字符</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">函数最大缩进不超过8层</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>可使用 <code>tab</code> 或者 <code>space</code> 来进行缩进。</p>
+                        <p><code>space</code>缩进时以4个为一组。</p>
+                        <p>因多层回调而导致层级太多时，应将回调函数抽离出来作为独立函数。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">函数最大参数数量不超过4个</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>超出时，请以参数包装对象的形式传入。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">换行规则/缩进规则</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>新变量在单独行中定义，不要把多个变量定义在一行中。</p>
+                        <p>出现 <code> { </code> , <code> [ </code> 时，在其后换行并增加一层缩进。</p>
+                        <p>多个变量（3个以上）连加时，在 <code> + </code> 处换行，并对齐 <code>+</code>。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">函数最大行数不超过40行</h3>
+                    </div>
+                    <div class="panel-body">
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">函数最大行数不超过40行</h3>
+                    </div>
+                    <div class="panel-body">
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">函数最大行数不超过40行</h3>
+                    </div>
+                    <div class="panel-body">
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">函数最大行数不超过40行</h3>
+                    </div>
+                    <div class="panel-body">
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">函数最大行数不超过40行</h3>
+                    </div>
+                    <div class="panel-body">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}
+
+
