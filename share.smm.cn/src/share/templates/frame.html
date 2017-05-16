@@ -81,7 +81,7 @@
 
     <div class="smm-index">
 
-        <ul class='{%if base.Frame.IsHidden("SMM_share_function_pointers_hidden")%}smm-index-fold{%endif%}' >
+<!--         <ul class='{%if base.Frame.IsHidden("SMM_share_function_pointers_hidden")%}smm-index-fold{%endif%}' >
             <a href='javascript:void(0)'>
                 <li data-container="body"
                     data-toggle="popover"
@@ -187,7 +187,7 @@
                 </li>
             </a>
 
-        </ul>
+        </ul> -->
         <ul class='{%if base.Frame.IsHidden("SMM_share_others_hidden")%}smm-index-fold{%endif%}' >
             <a href='javascript:void(0)'>
                 <li data-container="body"
@@ -226,7 +226,18 @@
                     <div class="smm-index-menu">run</div>
                 </li>
             </a>
-            <a href='{{base.Render.Links("host")}}/page/code_format'>
+            <a href='{{base.Render.Links("host")}}/page/tool_empty_paper'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="run"
+                    class="{%block page_empty_paper%}{%endblock%}">
+                    <i class="fa fa-code "></i>
+                    <div class="smm-index-menu">empty paper</div>
+                </li>
+            </a>
+            <!-- <a href='{{base.Render.Links("host")}}/page/code_format'>
                 <li data-container="body"
                     data-toggle="popover"
                     data-placement="right"
@@ -236,7 +247,7 @@
                     <i class="fa fa-bank "></i>
                     <div class="smm-index-menu">code format</div>
                 </li>
-            </a>
+            </a> -->
         </ul>
     </div>
 
