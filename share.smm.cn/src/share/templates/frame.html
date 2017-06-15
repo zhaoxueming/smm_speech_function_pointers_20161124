@@ -199,6 +199,34 @@
                     class="smm-index-leader smm_index_leader">
                     <i class="fa fa-2 fa-chevron-down"></i>
                     <div class="smm-index-menu">
+                        样式
+                        <i class="fa fa-cog pull-right smm-index-set-icon"></i>
+                    </div>
+                </li>
+            </a>
+            <a href='{{base.Render.Links("host")}}/page/style_semantic'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="json to go struct"
+                    class="{%block page_style_semantic%}{%endblock%}">
+                    <i class="fa fa-columns "></i>
+                    <div class="smm-index-menu">样式语义化</div>
+                </li>
+            </a>
+        </ul>
+        <ul class='{%if base.Frame.IsHidden("SMM_share_others_hidden")%}smm-index-fold{%endif%}' >
+            <a href='javascript:void(0)'>
+                <li data-container="body"
+                    data-toggle="popover"
+                    data-placement="right"
+                    data-trigger="hover"
+                    data-content="其他"
+                    hidden-cookie="SMM_share_others_hidden"
+                    class="smm-index-leader smm_index_leader">
+                    <i class="fa fa-2 fa-chevron-down"></i>
+                    <div class="smm-index-menu">
                         其他
                         <i class="fa fa-cog pull-right smm-index-set-icon"></i>
                     </div>

@@ -1,0 +1,352 @@
+{% extends  "frame.html" %}
+
+{% block title %} Tingersure's share {%endblock%}
+{%block function_pointers_anonymous%}smm-active{%endblock%}
+{% block scripts %}
+{%endblock%}
+
+
+{%block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="page-header">
+                    <h3>样式语义化</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">面临的问题</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>现有的样式库样式定义混乱</p>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">问题1 样式名无含义（ <a target="_blank" href="https://github.com/smmit/web/blob/master/zixun.smm.cn/src/zixun/static/css/css.css">https://static.smm.cn/zixun.smm.cn/1.5.148/css/<strong>css.css</strong></a> ）</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>样式名是奇怪的字母数字缩写，<strong>不看内容完全不知道发生了什么</strong>。</p>
+
+                        <pre>
+.t_c {text-align:center}
+.t_r {text-align:right}
+.t2em{text-indent:2em}
+                        </pre>
+                        <pre>
+.f12{font-size:12px}
+.f14{font-size:14px}
+.f16{font-size:16px}
+.f18{font-size:18px}
+.f20{font-size:20px}
+.l16{line-height:16px}
+.l17{line-height:17px}
+.l18{line-height:18px}
+.l19{line-height:19px}
+.l20{line-height:20px}
+.l21{line-height:21px}
+.l22{line-height:22px}
+.l23{line-height:23px}
+.l24{line-height:24px}
+.l25{line-height:25px}
+.l26{line-height:26px}
+.l27{line-height:27px}
+.l28{line-height:28px}
+.l29{line-height:29px}
+.l30{line-height:30px}
+                        </pre>
+                        <pre>
+.ma6,.mt6{margin-top:6px;}
+.ma6,.mr6{margin-right:6px;}
+.ma6,.mb6{margin-bottom:6px;}
+.ma6,.ml6{margin-left:6px;}
+.ma12,.mt12{margin-top:12px;}
+
+.mt24{margin-top:24px;}
+.ma12,.mr12{margin-right:12px;}
+.ma12,.mb12{margin-bottom:12px;}
+.ma12,.ml12{margin-left:12px;}
+                        </pre>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">问题2 样式名是内容的复述（<a target="_blank" href="https://github.com/smmit/web/blob/master/zixun.smm.cn/src/zixun/static/css/css.css">https://static.smm.cn/zixun.smm.cn/1.5.148/css/<strong>css.css</strong></a> ）</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>样式名就是内容复述，内容单一，可能需要大量的类才能实现简单的样式要求。使用者任然必须对样式细节非常熟悉才能使用，封装的完全没有实现。</p>
+                        <p><strong>除了少写几个字母，没起什么作用，写了和没写差不多。</strong></p>
+                        <pre>
+.red{color:red}
+.black{color:#000}
+.white{color:#fff}
+.gray{color:#888}
+.blue{color:#1e5a8f}
+.green{color:#008733}
+.orange{color:#fccf31}
+.gray{color:#888888}
+.bgblack {background:#3f3a39}
+.normal {font-weight:normal}
+.bold {font-weight:bold}
+                        </pre>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">问题3 命名规范混乱（<a target="_blank" href="https://github.com/smmit/web/blob/master/zixun.smm.cn/src/zixun/static/css/css.css">https://static.smm.cn/zixun.smm.cn/1.5.148/css/<strong>css.css</strong></a> ）</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>大写，小写，中划线连接，下划线链接，驼峰连接，直接连接，没有一点点征兆，你就这样出现。</p>
+                        <pre>
+.auto-login {}
+.auto-login input {}
+
+.submitBtn{}
+.submitBtn a{}
+
+.NEWS-SPECIAL a {}
+.NEWS-SPECIAL li a {}
+.NEWS-SPECIAL {}
+
+.stButton .facebook , .shareicons , .st_facebook{}
+                        </pre>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">问题4 补丁化（<a target="_blank" href="https://github.com/smmit/web/blob/master/zixun.smm.cn/src/zixun/static/css/css.css">https://static.smm.cn/zixun.smm.cn/1.5.148/css/<strong>css.css</strong></a> ）</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>由于之前样式设计的不合理导致无法通过正常手段来控制样式，没有去重构已有的设计使其合适当前需要来解决问题，而是通过强制的、补丁式的，饮鸩止渴的手段来实现。导致了整体结构设计更不合理。更加难以维护。</p>
+                        <pre>
+.stButton .chicklets{
+    padding:0<code>!important</code>;
+}
+.stButton{
+    margin:0!important;
+    width:16px!important;
+    height:16px!important;
+}
+.stButton .facebook , .shareicons , .st_facebook{
+    width:16px!important;
+    height:16px;
+    display:inline-block;
+    margin-right:5px;
+}
+.stButton .facebook {
+    background:url(../image/facebook.png) no-repeat!important;
+}
+.stButton .facebook:hover{
+    background:url(../image/facebook_hover.png) no-repeat!important;
+}
+                        </pre>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">问题5 使用ID选择器（<a target="_blank" href="https://github.com/smmit/web/blob/master/zixun.smm.cn/src/zixun/static/css/css.css">https://static.smm.cn/zixun.smm.cn/1.5.148/css/<strong>css.css</strong></a> ）</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>ID选择器与类选择器的不同之处在于，其全局只能有一个。使用ID选择器就意味着这个样式不可复用，通常更像是为某个特定元素定制的样式，这样的样式不应该出现在库类型的样式文件中。</p>
+                        <p>没有什么样式是不能用一个类名来表示的，如果有，那就两个。</p>
+                        <pre>
+#news,#content {}
+#news .list {}
+#news .list .news_type {}
+.news_type_1 {}
+#news .list .news_type_1 a {}
+.news_type_2 {}
+#news .list .news_type_2 a{}
+.news_type_3 {}
+#news .list .news_type_3 a{}
+#news .list .news_type a{}
+#news .SMM-NEWS-LIST {}
+#news .list .warp {}
+#news .list .pic {}
+
+#news .list h3 {}
+#news .list a {}
+#news .list a:hover {}
+#news .warp p {}
+#news .words {}
+
+#news .news-attr {}
+#news .list .news-keys {}
+#news .list .news-keys a {}
+#news .list .news-keys a:hover{}
+#news .share-div {}
+#news .share-div a {}
+#news .share-div a.shareqq {}
+#news .share-div a.sharetwb {}
+                        </pre>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">问题6 与脚本共用选择器</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>当修改某个元素样式的时候，经常会删除某个类，而当这个类上绑定了页面脚本的话，会引发不可预计的后果。</p>
+                        <p>一般的，任何时候，样式和脚本不应该使用同一个类名，以免互相干扰。</p>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">问题7 功能与职能杂糅（<a target="_blank" href="https://github.com/smmit/web/blob/master/zixun.smm.cn/src/zixun/static/css/css.css">https://static.smm.cn/zixun.smm.cn/1.5.148/css/<strong>css.css</strong></a> ）</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p><code>功能</code>指一个事物所具备的能力。</p>
+                        <p><code>职能</code>指一个事物所承担的职责。</p>
+                        <p>一个功能可以为多个职能提供服务。</p>
+                        <p>一个职能可能需要多个功能共同完成。</p>
+                        <p>功能和职能是多对多关系</p>
+                        <p>样式功能和职能的厘清，是内容与表现解耦合的核心所在</p>
+                        <pre>
+.author-name, .author-pwd {}
+.author-name em{}
+.tie-sprite{}
+.tie-textbox{}
+.author-tips{}
+.author-pwd{}
+.author-pwd em{}
+.auto-login {}
+.auto-login input {}
+.submitBtn{}
+.submitBtn a{}
+                        </pre>
+                    </div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">语义化的样式设计</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>1、厘清功能与职能。只提供功能，不掺杂职能。</p>
+                        <p>2、差异参数化。</p>
+                        <p>3、结构模块化。</p>
+                        <p>3、命名符合自然含义。</p>
+
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">示例 1 参数化<a target="_blank" href ="http://v3.bootcss.com/css/?#buttons-options">（bootstrap button）</a> </h3>
+                    </div>
+                    <div class="panel-body">
+                        <button type="button" class="btn">btn</button>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-danger">btn btn-danger</button>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-danger btn-lg">btn btn-danger btn-lg</button>
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-danger btn-lg btn-block">btn btn-danger btn-lg btn-block</button>
+                        <br />
+                        <pre>
+&lt;button type="button" class="btn"&gt;btn&lt;/button&gt;
+
+&lt;button type="button" class="btn btn-danger"&gt;btn btn-danger&lt;/button&gt;
+
+&lt;button type="button" class="btn btn-danger btn-lg"&gt;btn btn-danger btn-lg&lt;/button&gt;
+
+&lt;button type="button" class="btn btn-danger btn-lg btn-block"&gt;btn btn-danger btn-lg btn-block&lt;/button&gt;
+                        </pre>
+
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">示例 2 模块化<a target="_blank" href ="http://v3.bootcss.com/css/?#buttons-options">（bootstrap panel）</a> </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-6 ">
+                                <div class="panel panel-success">
+                                    <div class="panel-body">
+                                        Panel body
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 ">
+                                <pre>
+&lt;div class="panel"&gt;
+    &lt;div class="panel-body"&gt;
+        Panel body
+    &lt;/div&gt;
+&lt;/div&gt;
+                                </pre>
+                            </div>
+                            <div class="col-xs-6 ">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">Panel heading</div>
+                                    <div class="panel-body">
+                                        Panel body
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 ">
+                                <pre>
+&lt;div class="panel"&gt;
+    &lt;div class="panel-heading"&gt;Panel heading&lt;/div&gt;
+    &lt;div class="panel-body"&gt;
+        Panel body
+    &lt;/div&gt;
+&lt;/div&gt;
+                                </pre>
+                            </div>
+                            <div class="col-xs-6 ">
+                                <div class="panel panel-success">
+                                    <div class="panel-body">
+                                        Panel body
+                                    </div>
+                                    <div class="panel-footer">Panel footer</div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 ">
+                                <pre>
+&lt;div class="panel"&gt;
+    &lt;div class="panel-body"&gt;
+        Panel body
+    &lt;/div&gt;
+    &lt;div class="panel-footer"&gt;Panel footer&lt;/div&gt;
+&lt;/div&gt;
+                                </pre>
+                            </div>
+                            <div class="col-xs-6 ">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">Panel heading</div>
+                                    <div class="panel-body">
+                                        Panel body
+                                    </div>
+                                    <div class="panel-footer">Panel footer</div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 ">
+                                <pre>
+&lt;div class="panel"&gt;
+    &lt;div class="panel-heading"&gt;Panel heading&lt;/div&gt;
+    &lt;div class="panel-body">
+        Panel body
+    &lt;/div&gt;
+    &lt;div class="panel-footer"&gt;Panel footer&lt;/div&gt;
+&lt;/div&gt;
+                                </pre>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}
+
+
