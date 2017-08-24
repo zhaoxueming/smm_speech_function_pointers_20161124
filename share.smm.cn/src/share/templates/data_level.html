@@ -1,0 +1,180 @@
+{% extends  "frame.html" %}
+
+{% block title %} Tingersure's share {%endblock%}
+{%block function_pointers_anonymous%}smm-active{%endblock%}
+{% block scripts %}
+{%endblock%}
+
+
+{%block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="page-header">
+                    <h3>数据分层</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">面临的问题</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>数据处理逻辑混乱拖沓</p>
+                        <p>数据含义不明确，检修错误不方便</p>
+                        <p>注入风险</p>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">问题1</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <a target="_blank" href="http://developer.kf5.com/restfulapi/core/requests/#requests-create">http://developer.kf5.com/restfulapi/core/requests/#requests-create</a>
+                        </p>
+                        <p>返回结果说明</p>
+                        <p>成功的请求，会返回200或300范围的http状态码</p>
+                        <p>失败的请求，会返回400范围的http状态码</p>
+                        <p>如果返回500范围的http状态码，可能是云客服存在bug，也可能是服务正在更新维护(此时会返回503 Service Unavailable)</p>
+                    </div>
+                    <div class="panel-body">
+                        <p><a target="_blank" href="https://github.com/smmit/web/blob/question-1.0/question.smm.cn/src/question/common/action_question.go#L181">https://github.com/smmit/web/blob/question-1.0/question.smm.cn/src/question/common/action_question.go#L181</a></p>
+
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">问题2</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p><a target="_blank" href="https://github.com/smmit/design/blob/master/api_docs/news_center_api.md#获取新闻列表">https://github.com/smmit/design/blob/master/api_docs/news_center_api.md#获取新闻列表</a></p>
+                        <p><a target="_blank" href="https://github.com/smmit/web/blob/master/zixun.smm.cn/src/model/news.go#L13">https://github.com/smmit/web/blob/master/zixun.smm.cn/src/model/news.go#L13</a></p>
+                        <pre>
+                            type WrapNewsListResult struct {
+                                ResultStatus
+                                Data   []NewsList
+                                Length int64 `json:"Length"`
+                            }
+                            type WrapNewsListSearch struct {
+                                ResultStatus
+                                Data   []NewsSearch
+                                Length int64 `json:"Length"`
+                            }
+                            type WrapNewsResult struct {
+                                ResultStatus
+                                Data News
+                            }
+                            type WrapNewsRecommendResult struct {
+                                ResultStatus
+                                Data []NewsRecommend
+                            }
+                            type SpotcenterTypeResult struct {
+                                ResultStatus
+                                Data   []NewsSpotcenterType
+                                Length int64 `json:"Length"`
+                            }
+                        </pre>
+
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">问题3</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p><a target="_blank" href="http://ops.smm.cn/task_create?id=348">http://ops.smm.cn/task_create?id=348</a></p>
+
+
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">示例 1 </h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>字符转义</p>
+                        <pre>
+                            var s = "\""
+                        </pre>
+                        <pre>
+                            <div> &lt;div&gt; </div>
+
+                            &lt;div&gt; &amp;lt;div&amp;gt; &lt;/div&gt;
+
+                            &amp;lt;div&amp;gt; &amp;amp;lt;div&amp;amp;gt; &amp;lt;/div&amp;gt;
+                        </pre>
+                        <pre>
+                            "\".matches("\\\\"); //true     //in java
+                        </pre>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">示例2</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>TCP/IP协议</p>
+                        <p><a target="_blank" href="http://www.2cto.com/net/201310/249016.html">http://www.2cto.com/net/201310/249016.html</a></p>
+                        <img src="http://up.2cto.com/2013/1011/20131011114023929.png">
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">示例3</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>TR069协议</p>
+                        <p><a target="_blank" href="http://blog.csdn.net/dreamcode/article/details/3864715">http://blog.csdn.net/dreamcode/article/details/3864715</a></p>
+
+                        <pre>
+                            ——————————————
+                            CPE/ACS Management App
+                            ——————————————
+                            RPC Method
+                            ——————————————
+                            SOAP
+                            ——————————————
+                            HTTP 1.1
+                            ——————————————
+                            SSL3.0 orTLS1.0
+                            ——————————————
+                            TCP/IP
+                            ——————————————
+                        </pre>
+
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">示例4</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <pre>
+                            ——————————————
+                            Micro Service Web App
+                            ——————————————
+                            RPC Method
+                            ——————————————
+                            {CODE/DATA/MSG}
+                            ——————————————
+                            HTTP 1.1
+                            ——————————————
+                            SSL/TLS
+                            ——————————————
+                            TCP/IP
+                            ——————————————
+                        </pre>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{%endblock%}
+
+
