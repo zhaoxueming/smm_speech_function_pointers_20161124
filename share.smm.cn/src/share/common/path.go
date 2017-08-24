@@ -22,9 +22,11 @@ func init(){
         "/page/:name"                       : pages,
         "/tool/gorun/:value"                : go_run,
         "/tool/noderun/:value"              : node_run,
+        "/gomoku/:style"                    : action_gomoku,
     }
 
     posts = map[string](func(*gin.Context)){
+        "/gomoku/:style"                      : action_gomoku,
         "/fileupload/:name/upload.json"     : fileupload,
     }
 

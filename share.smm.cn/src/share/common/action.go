@@ -5,11 +5,12 @@ import(
     "github.com/flosch/pongo2"
     "github.com/axgle/mahonia"
     "github.com/smmit/smmbase/qiniu"
+    "gitHub.com/zhaoxueming/smm_speech_function_pointers_20161124/share.smm.cn/src/share/common/gomoku"
     // "github.com/levigross/grequests"
     "crypto/md5"
     "log"
     "strings"
-    // "strconv"
+    "strconv"
     // "math"
     "path/filepath"
     "errors"
@@ -19,6 +20,7 @@ import(
     "bufio"
     "fmt"
     // "time"
+    "encoding/json"
     // "strings"
 
 )
@@ -194,3 +196,62 @@ func fileupload(c *gin.Context) {
 
 }
 
+var (
+    action_gomoku_style = map[string](func(gomoku.GomokuBoard,int,*gomoku.GomokuPoint) error){
+        "free" : gomoku.Gomoku_free,
+    }
+)
+
+func action_gomoku(c *gin.Context){
+    c.Header("Content-Type", "application/json; charset=UTF-8")
+    c.Header("Access-Control-Allow-Origin", "*")
+    c.Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    c.Header("Access-Control-Allow-Methods", "HEAD, GET, POST, DELETE, PUT, OPTIONS")
+    var err error
+    var point gomoku.GomokuPoint
+    var board gomoku.GomokuBoard
+    var role int
+    req := map[string]string{}
+    _err := func () {
+        c.JSON(http.StatusOK, map[string]interface{}{
+            JSON_CODE  : JSON_ERROR_CODE,
+            JSON_MSG   : err.Error(),
+        })
+    }
+
+    _success:= func () {
+
+        c.JSON(http.StatusOK, map[string]interface{}{
+            JSON_CODE  : JSON_SUCCESS_CODE,
+            JSON_MSG   : JSON_SUCCESS_MSG,
+            JSON_DATA  : &point,
+        })
+    }
+
+    err = render_error_control(
+    func()error{
+        return render_param([]string{
+            "player_role",
+            "chessboard",
+            "style",
+        },c,req)
+    },func ()error {
+        role,err = strconv.Atoi(req["player_role"])
+        return err
+    },func ()error {
+        return json.Unmarshal([]byte(req["chessboard"]) , &board)
+    },func ()error {
+        var action = action_gomoku_style[req["style"]]
+        if(action == nil){
+            return errors.New("unknown style")
+        }
+        return action(board, role, &point)
+    })
+
+    if( err != nil ){
+        log.Println(err)
+        _err();
+        return
+    }
+    _success();
+}

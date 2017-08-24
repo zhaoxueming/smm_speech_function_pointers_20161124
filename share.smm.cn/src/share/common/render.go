@@ -100,84 +100,56 @@ func render_base64_decode( key string ) (string, error) {
     return string(value) ,err
 }
 
-func render_param_base64( keys []string, c *gin.Context , req map[string]string) error {
+func render_param_core( keys []string, c *gin.Context , req map[string]string , ignore bool , base64 bool ) error {
     for i := 0; i < len(keys); i++ {
-
         param, ok := c.Params.Get(keys[i])
-        if !ok {
-            log.Println( keys[i], req , c)
-            return errors.New( ERROR_PARAM_FORMAT )
+        if !ok || param == "_" || param == "" {
+            param, ok = c.GetQuery(keys[i])
         }
-        if param == "_" || param == "" {
-            continue
+        if !ok || param == "_" || param == "" {
+            param, ok = c.GetPostForm(keys[i])
         }
-        data, err := render_base64_decode(param)
-        if err != nil {
-            log.Println( err , keys[i], req , c )
-            return errors.New( ERROR_PARAM_FORMAT )
+        if(ignore){
+            if !ok || param == "_" || param == "" {
+                continue
+            }
+        }else{
+            if !ok {
+                log.Println( keys[i], req , c)
+                return errors.New( ERROR_PARAM_FORMAT )
+            }
+            if param == "_" || param == "" {
+                continue
+            }
         }
-        req[keys[i]] = data
+        if (base64) {
+            data, err := render_base64_decode(param)
+            if err != nil {
+                log.Println( err , keys[i], req , c )
+                return errors.New( ERROR_PARAM_FORMAT )
+            }
+            req[keys[i]] = data
+        }else{
+            req[keys[i]] = param
+        }
     }
     return nil
+}
+
+func render_param_base64( keys []string, c *gin.Context , req map[string]string) error {
+    return render_param_core(keys,c,req,false,true)
 }
 
 func render_param_base64_ignore( keys []string, c *gin.Context , req map[string]string) error {
-    for i := 0; i < len(keys); i++ {
-
-        param, ok := c.Params.Get(keys[i])
-        if !ok || param == "_" || param == "" {
-            continue
-        }
-        data, err := render_base64_decode(param)
-        if err != nil {
-            log.Println( err , keys[i], req , c )
-            return errors.New( ERROR_PARAM_FORMAT )
-        }
-        req[keys[i]] = data
-    }
-    return nil
+    return render_param_core(keys,c,req,true,true)
 }
 
-
 func render_param( keys []string, c *gin.Context , req map[string]string) error {
-    for i := 0; i < len(keys); i++ {
-
-        param, ok := c.Params.Get(keys[i])
-        if !ok {
-            log.Println( keys[i], req , c)
-            return errors.New( ERROR_PARAM_FORMAT )
-        }
-        if param == "_" {
-            continue
-        }
-        req[keys[i]] = param
-    }
-    return nil
+    return render_param_core(keys,c,req,false,false)
 }
 
 func render_param_ignore( keys []string, c *gin.Context , req map[string]string) error {
-    for i := 0; i < len(keys); i++ {
-
-        param, ok := c.Params.Get(keys[i])
-        if !ok || param == "_" || param == "" {
-            continue
-        }
-        req[keys[i]] = param
-    }
-    return nil
-}
-
-func render_param_set( c *gin.Context,key,value string) {
-    for index, _ := range c.Params {
-        if c.Params[index].Key == key {
-            c.Params[index].Value = value
-            return
-        }
-    }
-    c.Params = append(c.Params,gin.Param{
-        Key : key,
-        Value : value,
-    })
+    return render_param_core(keys,c,req,true,false)
 }
 
 func render_param_all(  p []string ,
@@ -208,6 +180,19 @@ func render_param_all(  p []string ,
         }
     }
     return nil
+}
+
+func render_param_set( c *gin.Context,key,value string) {
+    for index, _ := range c.Params {
+        if c.Params[index].Key == key {
+            c.Params[index].Value = value
+            return
+        }
+    }
+    c.Params = append(c.Params,gin.Param{
+        Key : key,
+        Value : value,
+    })
 }
 
 func render_error_control(errfuncs ...func()(error)) error {
