@@ -5,7 +5,7 @@ import(
     "github.com/flosch/pongo2"
     "github.com/axgle/mahonia"
     "github.com/smmit/smmbase/qiniu"
-    "gitHub.com/zhaoxueming/smm_speech_function_pointers_20161124/share.smm.cn/src/share/common/gomoku"
+    "github.com/zhaoxueming/smm_speech_function_pointers_20161124/share.smm.cn/src/share/common/gomoku"
     // "github.com/levigross/grequests"
     "crypto/md5"
     "log"
